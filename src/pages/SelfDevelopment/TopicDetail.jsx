@@ -5,6 +5,7 @@ import { FaCheck, FaArrowRight, FaQuestionCircle, FaLightbulb, FaBookOpen, FaChe
 import SubPageHeader from '../../components/SubPageHeader';
 import { selfDevelopmentData } from '../../data/selfDevelopmentData';
 import ParticlesBackground from '../../components/ParticlesBackground';
+import WinnerOverlay from '../../components/WinnerOverlay';
 
 const TopicDetail = () => {
     const { categoryId, topicId } = useParams();
@@ -184,23 +185,11 @@ const TopicDetail = () => {
                 </motion.div>
             </div>
 
-            {/* Confetti Animation Placeholder Effect */}
-            <AnimatePresence>
-                {showConfetti && (
-                    <motion.div
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        exit={{ opacity: 0 }}
-                        className="fixed inset-0 pointer-events-none z-50 flex items-center justify-center"
-                    >
-                        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-9xl">🌟</div>
-                        <motion.div
-                            animate={{ scale: [1, 1.5, 0], opacity: [1, 1, 0] }}
-                            className="absolute bg-[var(--color-accent)] w-full h-full opacity-10 rounded-full"
-                        />
-                    </motion.div>
-                )}
-            </AnimatePresence>
+            {/* Winner Overlay */}
+            <WinnerOverlay
+                isVisible={showConfetti}
+                onClose={() => setShowConfetti(false)}
+            />
 
         </div>
     );

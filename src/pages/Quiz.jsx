@@ -3,7 +3,9 @@ import { useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FaClock, FaCheck, FaTimes, FaQuestionCircle } from 'react-icons/fa';
 import ParticlesBackground from '../components/ParticlesBackground';
+import SubPageHeader from '../components/SubPageHeader';
 import { questions } from '../data/questions';
+import WinnerOverlay from '../components/WinnerOverlay';
 
 const Quiz = () => {
     const navigate = useNavigate();
@@ -14,6 +16,7 @@ const Quiz = () => {
     const [timeLeft, setTimeLeft] = useState(15);
     const [isAnswered, setIsAnswered] = useState(false);
     const [quizStarted, setQuizStarted] = useState(false);
+    const [showWinner, setShowWinner] = useState(false);
 
     // Initial delay for smooth transition
     useEffect(() => {
@@ -31,7 +34,10 @@ const Quiz = () => {
             setTimeLeft(15);
         } else {
             // Finish Quiz
-            navigate('/results', { state: { score, correctCount, total: questions.length } });
+            setShowWinner(true);
+            setTimeout(() => {
+                navigate('/results', { state: { score, correctCount, total: questions.length } });
+            }, 2500);
         }
     }, [currentQuestionIndex, score, correctCount, navigate]);
 
@@ -165,6 +171,8 @@ const Quiz = () => {
                     </motion.div>
                 </AnimatePresence>
             </div>
+            {/* Winner Overlay */}
+            <WinnerOverlay isVisible={showWinner} onClose={() => setShowWinner(false)} />
         </div>
     );
 };

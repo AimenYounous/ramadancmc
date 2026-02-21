@@ -170,10 +170,7 @@ const Dashboard = () => {
                 </motion.div>
             </div>
 
-            {/* Footer */}
-            <div className="z-10 mt-auto pt-12 pb-4 text-xs text-gray-500 font-mono text-center">
-                © 2026 CMC - OFPPT. جميع الحقوق محفوظة.
-            </div>
+
 
         </div>
     );

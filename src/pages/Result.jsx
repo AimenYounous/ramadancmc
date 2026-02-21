@@ -49,15 +49,19 @@ const Result = () => {
 
                     <div className="relative z-10">
                         <motion.div
-                            initial={{ y: -20 }}
-                            animate={{ y: 0 }}
-                            className="inline-block p-4 bg-[rgba(218,165,32,0.1)] rounded-3xl border border-[rgba(218,165,32,0.3)] mb-6"
+                            initial={{ scale: 0, rotate: -20 }}
+                            animate={{ scale: 1, rotate: 0 }}
+                            transition={{ type: "spring", stiffness: 200, damping: 12, delay: 0.2 }}
+                            className="relative mb-8"
                         >
-                            <FaTrophy className="text-5xl text-[var(--color-accent)]" />
+                            <img
+                                src="/assets/gagnant.png"
+                                alt="Winner"
+                                className="w-48 h-auto mx-auto drop-shadow-[0_0_20px_rgba(218,165,32,0.5)]"
+                            />
                         </motion.div>
 
-                        <h1 className="text-3xl md:text-4xl font-black text-white mb-2">نتيجة المسابقة</h1>
-                        <p className="text-[var(--color-accent)] text-lg font-bold mb-8">{getMotivationalMessage()}</p>
+                        <h1 className="text-3xl md:text-4xl font-black text-white mb-8">نتيجة المسابقة</h1>
 
                         <div className="grid grid-cols-2 gap-4 mb-8">
                             <div className="bg-[rgba(255,255,255,0.03)] p-6 rounded-[24px] border border-[rgba(255,255,255,0.05)]">

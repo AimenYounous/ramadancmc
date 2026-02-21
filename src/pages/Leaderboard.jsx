@@ -25,7 +25,7 @@ const Leaderboard = () => {
             <ParticlesBackground />
 
             <div className="z-10 w-full max-w-2xl mt-8 mb-8 flex items-center justify-between">
-                <h1 className="text-3xl font-bold text-[var(--color-accent)] drop-shadow-md">لوحة المتصدرين 🏆</h1>
+                <h1 className="text-3xl font-bold text-[var(--color-accent)] drop-shadow-md">لوحة المتصدرين</h1>
                 <Link to="/">
                     <button className="p-3 bg-[rgba(255,255,255,0.1)] rounded-full hover:bg-[rgba(255,255,255,0.2)] transition-colors">
                         <FaArrowRight className="text-white" />

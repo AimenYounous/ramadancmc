@@ -332,11 +332,13 @@ const WordCrush = () => {
                     >
                         <motion.div
                             initial={{ scale: 0.8, y: 50 }} animate={{ scale: 1, y: 0 }}
-                            className="bg-gradient-to-br from-[#1a2520] to-[#0a0f0d] p-12 rounded-[50px] border border-[var(--color-accent)] max-w-md w-full text-center relative shadow-[0_0_50px_rgba(218,165,32,0.2)]"
+                            className="bg-gradient-to-br from-[#1a2520] to-[#0a0f0d] p-10 rounded-[50px] border border-[var(--color-accent)] max-w-md w-full text-center relative shadow-[0_0_50px_rgba(218,165,32,0.2)]"
                         >
-                            <FaTrophy className="text-7xl text-[var(--color-accent)] mx-auto mb-6 drop-shadow-glow" />
-                            <h2 className="text-4xl font-black text-white mb-4">أحسنت!</h2>
-                            <p className="text-gray-400 mb-10 text-lg">لقد أتممت مستوى "{level.title}" بنجاح.</p>
+                            <img
+                                src="/assets/gagnant.png"
+                                alt="Winner"
+                                className="w-64 h-auto mx-auto mb-8 drop-shadow-glow"
+                            />
                             <motion.button
                                 whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}
                                 onClick={nextLevel}
