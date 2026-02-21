@@ -42,16 +42,16 @@ const SelfDevelopment = () => {
     };
 
     return (
-        <div className="min-h-screen bg-[var(--color-bg)] perspective-container overflow-x-hidden relative" dir="rtl">
+        <div className="min-h-screen bg-[var(--color-bg)] perspective-container overflow-x-hidden relative flex flex-col" dir="rtl">
             <ParticlesBackground />
             <SubPageHeader title="التنمية البشرية في رمضان" />
 
-            <div className="max-w-6xl mx-auto px-6 py-12 relative z-10">
+            <div className="flex-1 flex flex-col justify-center max-w-6xl mx-auto px-6 py-20 relative z-10 w-full">
                 {/* Progress Tracker */}
                 <motion.div
                     initial={{ opacity: 0, y: -20 }}
                     animate={{ opacity: 1, y: 0 }}
-                    className="mb-12 p-6 bg-white/5 backdrop-blur-md rounded-2xl border border-[var(--color-accent)]/20 shadow-xl"
+                    className="mb-32 p-6 bg-white/5 backdrop-blur-md rounded-2xl border border-[var(--color-accent)]/20 shadow-xl w-full"
                 >
                     <div className="flex justify-between items-center mb-4">
                         <h3 className="text-xl font-bold text-white">تقدمك في التطوير الذاتي</h3>
@@ -73,7 +73,7 @@ const SelfDevelopment = () => {
                     variants={containerVariants}
                     initial="hidden"
                     animate="visible"
-                    className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8"
+                    className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8 w-full"
                 >
                     {selfDevelopmentData.categories.map((category) => {
                         const Icon = iconMap[category.icon] || FaLeaf;

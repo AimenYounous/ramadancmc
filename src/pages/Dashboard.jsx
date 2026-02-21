@@ -1,7 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { FaCalendarAlt, FaMosque, FaClock, FaGamepad } from 'react-icons/fa';
+import { FaCalendarAlt, FaMosque, FaClock, FaGamepad, FaBrain } from 'react-icons/fa';
 import ParticlesBackground from '../components/ParticlesBackground';
 import fanosImg from '/assets/fanos.png';
 import hilalImg from '/assets/hilal.png';
@@ -32,7 +32,7 @@ const Dashboard = () => {
         {
             title: 'التنمية البشرية',
             subtitle: 'تطوير الذات في رمضان',
-            icon: FaGamepad, // Using FaGamepad for now, will refine icons later if needed
+            icon: FaBrain,
             path: '/self-development',
             delay: 0.3
         },
