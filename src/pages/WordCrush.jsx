@@ -151,7 +151,7 @@ const WordCrush = () => {
                     onClick={() => navigate('/games')}
                     className="flex items-center gap-2 text-white/60 hover:text-[var(--color-accent)] transition-colors bg-white/5 px-4 py-2 rounded-xl border border-white/10 backdrop-blur-xl text-xs font-bold"
                 >
-                    <FaArrowRight /> الرئيسية
+                    <FaArrowRight /> عودة للتحديات
                 </motion.button>
                 <div className="text-[var(--color-accent)] opacity-20"><FaStar /></div>
             </div>
@@ -332,12 +332,12 @@ const WordCrush = () => {
                     >
                         <motion.div
                             initial={{ scale: 0.8, y: 50 }} animate={{ scale: 1, y: 0 }}
-                            className="bg-gradient-to-br from-[#1a2520] to-[#0a0f0d] p-10 rounded-[50px] border border-[var(--color-accent)] max-w-md w-full text-center relative shadow-[0_0_50px_rgba(218,165,32,0.2)]"
+                            className="bg-gradient-to-br from-[#1a2520] to-[#0a0f0d] p-10 rounded-[50px] border border-[var(--color-accent)] max-w-md w-full flex flex-col items-center text-center relative shadow-[0_0_50px_rgba(218,165,32,0.2)]"
                         >
                             <img
                                 src="/assets/gagnant.png"
                                 alt="Winner"
-                                className="w-64 h-auto mx-auto mb-8 drop-shadow-glow"
+                                className="w-64 h-auto block mx-auto mb-8 drop-shadow-glow"
                             />
                             <motion.button
                                 whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}

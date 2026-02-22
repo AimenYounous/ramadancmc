@@ -42,7 +42,7 @@ const QuizIntro = () => {
                     onClick={() => navigate('/games')}
                     className="flex items-center gap-2 text-gray-400 hover:text-[var(--color-accent)] transition-colors"
                 >
-                    <FaArrowRight /> العودة للألعاب
+                    <FaArrowRight /> عودة للتحديات
                 </button>
             </motion.div>
 
