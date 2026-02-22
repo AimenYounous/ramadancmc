@@ -6,6 +6,7 @@ import ParticlesBackground from '../components/ParticlesBackground';
 import SubPageHeader from '../components/SubPageHeader';
 import { questions } from '../data/questions';
 import WinnerOverlay from '../components/WinnerOverlay';
+import ConfirmModal from '../components/ConfirmModal';
 import { useQuiz } from '../context/QuizContext';
 
 const Quiz = () => {
@@ -21,11 +22,16 @@ const Quiz = () => {
     const [isAnswered, setIsAnswered] = useState(false);
     const [quizStarted, setQuizStarted] = useState(false);
     const [showWinner, setShowWinner] = useState(false);
+    const [showConfirm, setShowConfirm] = useState(false);
     const [lives, setLives] = useState(3);
 
     // Initial check for player name and randomize questions
     useEffect(() => {
-        if (!playerName) {
+        // Fallback check to localStorage if state hasn't updated yet
+        const persistentName = localStorage.getItem('cmc-quiz-player-name');
+        const finalName = playerName || (persistentName ? JSON.parse(persistentName) : '');
+
+        if (!finalName) {
             navigate('/quiz-intro');
             return;
         }
@@ -110,9 +116,7 @@ const Quiz = () => {
     }, [timeLeft, isAnswered, quizStarted, handleAnswer]);
 
     const handleLeave = () => {
-        if (window.confirm('هل أنت متأكد من مغادرة التحدي؟ سيتم احتساب 0 نقطة.')) {
-            finishQuiz('aborted');
-        }
+        setShowConfirm(true);
     };
 
     if (!currentQuestion) return null;
@@ -121,14 +125,14 @@ const Quiz = () => {
 
     return (
         <div className="min-h-screen relative flex flex-col items-center bg-[#0a0f0d]" dir="rtl">
-            <SubPageHeader title="تحدي المعلومات" />
+            <SubPageHeader title="تحدي المعلومات" showHome={false} className="z-[60]" />
             <ParticlesBackground />
 
             {/* Leave Button */}
-            <div className="absolute top-6 left-6 z-20">
+            <div className="absolute top-6 left-6 z-[70]">
                 <button
                     onClick={handleLeave}
-                    className="flex items-center gap-2 bg-red-600/10 hover:bg-red-600/20 text-red-500 px-4 py-2 rounded-xl border border-red-500/20 transition-all font-bold text-sm"
+                    className="flex items-center gap-2 bg-red-600/10 hover:bg-red-600/20 text-red-500 px-4 py-2 rounded-xl border border-red-500/20 transition-all font-bold text-sm shadow-lg backdrop-blur-md"
                 >
                     <FaDoorOpen /> مغادرة
                 </button>
@@ -240,8 +244,15 @@ const Quiz = () => {
                     </motion.div>
                 </AnimatePresence>
             </div>
-            {/* Winner Overlay */}
+            {/* Overlays */}
             <WinnerOverlay isVisible={showWinner} onClose={() => setShowWinner(false)} />
+            <ConfirmModal
+                isOpen={showConfirm}
+                onClose={() => setShowConfirm(false)}
+                onConfirm={() => finishQuiz('aborted')}
+                title="هل أنت متأكد من المغادرة؟"
+                message="سيتم احتساب 0 نقطة لهذا التحدي."
+            />
         </div>
     );
 };

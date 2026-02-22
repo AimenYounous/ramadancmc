@@ -7,10 +7,15 @@ import { useQuiz } from '../context/QuizContext';
 import '../styles/components.css';
 
 const QuizIntro = () => {
-    const { registerPlayer, playerName, resetGame, registeredPlayers } = useQuiz();
-    const [nameInput, setNameInput] = useState(playerName || '');
+    const { registerPlayer, setPlayerName, playerName, registeredPlayers } = useQuiz();
+    const [nameInput, setNameInput] = useState('');
     const navigate = useNavigate();
     const [error, setError] = useState('');
+
+    // Clear session name on mount for fresh input
+    useEffect(() => {
+        setPlayerName('');
+    }, [setPlayerName]);
 
     const handleStart = (e) => {
         e.preventDefault();
