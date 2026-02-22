@@ -55,7 +55,7 @@ const QuizIntro = () => {
             >
                 <div className="flex flex-col items-center max-w-2xl mx-auto">
                     <h2 className="text-3xl md:text-4xl font-extrabold text-[var(--color-accent)] drop-shadow-md tracking-wider mb-4">
-                        تحدي المعلومات 🌙
+                        تحدي المعلومات
                     </h2>
                     <div className="w-48 h-1 bg-gradient-to-r from-transparent via-[var(--color-accent)] to-transparent mb-8"></div>
                 </div>
@@ -75,15 +75,14 @@ const QuizIntro = () => {
                         {/* Decorative Circle */}
                         <div className="absolute -top-10 -right-10 w-40 h-40 bg-[var(--color-primary)] rounded-full blur-3xl opacity-30"></div>
 
-                        <h1 className="text-4xl md:text-5xl font-black mb-8 text-transparent bg-clip-text bg-gradient-to-b from-[#FFF] to-[#CCC] drop-shadow-sm">
-                            تسجيل الدخول 🌙
+                        <h1 style={{ marginTop: "2%" }} className="text-4xl md:text-3xl font-black mb-8 text-transparent bg-clip-text bg-gradient-to-b from-[#FFF] to-[#CCC] drop-shadow-sm">
+                            أدخل اسمك
                         </h1>
 
                         <form onSubmit={handleStart} className="flex flex-col gap-6">
                             <div className="relative group">
                                 <input
                                     type="text"
-                                    placeholder="أدخل اسمك الكامل"
                                     value={nameInput}
                                     onChange={(e) => {
                                         setNameInput(e.target.value);
@@ -121,7 +120,7 @@ const QuizIntro = () => {
                             <FaTrophy className="text-[var(--color-accent)]" /> لوحة المتصدرين
                         </h3>
 
-                        <div className="space-y-3 pr-2 max-h-[450px] overflow-y-auto custom-scrollbar">
+                        <div className="space-y-3 pl-2 pr-1 h-[400px] overflow-y-auto custom-scrollbar">
                             {registeredPlayers && registeredPlayers.length > 0 ? (
                                 [...registeredPlayers]
                                     .sort((a, b) => b.score - a.score)
