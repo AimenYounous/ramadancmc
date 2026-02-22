@@ -43,8 +43,11 @@ const TopicList = () => {
     return (
         <div className="min-h-screen bg-[var(--color-bg)] overflow-x-hidden relative" dir="rtl">
             <ParticlesBackground />
-            <SubPageHeader title={category.title} />
-
+            <SubPageHeader
+                title={category.title}
+                subBackLabel="العودة للأقسام"
+                subBackPath="/self-development"
+            />
             <div className="flex-1 relative z-10 w-full flex justify-center items-center">
                 <div className="w-full max-w-4xl px-6 py-12 flex flex-col">
                     <motion.div
@@ -92,20 +95,6 @@ const TopicList = () => {
                                 </motion.button>
                             );
                         })}
-                    </motion.div>
-
-                    <motion.div
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        transition={{ delay: 0.5 }}
-                        className="mt-12 text-center"
-                    >
-                        <button
-                            onClick={() => navigate('/self-development')}
-                            className="px-8 py-3 rounded-full bg-white/5 border border-white/10 text-white font-bold hover:bg-white/10 transition-all"
-                        >
-                            العودة للأقسام
-                        </button>
                     </motion.div>
                 </div>
             </div>

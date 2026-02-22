@@ -13,8 +13,8 @@ const Calendar = () => {
 
     useEffect(() => {
         // Calculate current Ramadan day
-        // Assuming Ramadan 2026 starts on Feb 18, 2026
-        const ramadanStart = new Date('2026-02-18');
+        // Assuming Ramadan 2026 in Morocco starts on Feb 19, 2026
+        const ramadanStart = new Date('2026-02-19');
         const today = new Date();
 
         // Calculate difference in days
@@ -71,7 +71,7 @@ const Calendar = () => {
 
 
             {/* Standardized Header */}
-            <SubPageHeader title="رحلة رمضان" />
+            <SubPageHeader title="رحلة رمضان" transparent={true} />
 
             {/* Journey Map Content */}
             <div className="z-10 w-full overflow-y-auto pb-20">

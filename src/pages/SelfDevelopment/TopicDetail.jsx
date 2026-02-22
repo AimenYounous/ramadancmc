@@ -41,21 +41,15 @@ const TopicDetail = () => {
     }
 
     return (
-        <div className="min-h-screen bg-gradient-to-br from-[#0c2410] via-[#041108] to-[#0c2410] overflow-x-hidden relative flex items-center justify-center py-12 md:py-20" dir="rtl">
+        <div className="min-h-screen bg-gradient-to-br from-[#0c2410] via-[#041108] to-[#0c2410] overflow-x-hidden relative flex flex-col items-center" dir="rtl">
             <ParticlesBackground />
+            <SubPageHeader
+                title={category?.title || "تطوير الذات"}
+                subBackLabel="العودة للمواضيع"
+                subBackPath={`/self-development/${categoryId}`}
+            />
 
-            {/* Minimal Back Button */}
-            <div className="absolute top-8 right-8 z-20">
-                <button
-                    onClick={() => navigate(`/self-development/${categoryId}`)}
-                    className="flex items-center gap-2 text-[var(--color-accent)] opacity-70 hover:opacity-100 transition-all font-bold group"
-                >
-                    <FaArrowRight className="group-hover:translate-x-1 transition-transform" />
-                    العودة للمواضيع
-                </button>
-            </div>
-
-            <div className="max-w-[850px] w-full px-6 relative z-10">
+            <div className="max-w-[850px] w-full px-6 relative z-10 py-12 md:py-20">
                 <motion.div
                     initial={{ opacity: 0, y: 30 }}
                     animate={{ opacity: 1, y: 0 }}

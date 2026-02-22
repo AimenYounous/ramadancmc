@@ -49,7 +49,11 @@ const DayDetail = () => {
     return (
         <div className="min-h-screen relative flex flex-col bg-[#0a0f0d] text-white pb-20" dir="rtl">
             <ParticlesBackground />
-            <SubPageHeader title={`اليوم ${data.day}: ${data.title}`} />
+            <SubPageHeader
+                title={`اليوم ${data.day}: ${data.title}`}
+                subBackLabel="العودة لخريطة الرحلة"
+                subBackPath="/calendar"
+            />
 
             <div className="flex-1 flex flex-col items-center justify-center py-4 md:py-8">
                 <motion.div
@@ -121,16 +125,6 @@ const DayDetail = () => {
                         </p>
                     </motion.div>
 
-                    {/* Navigation Footer */}
-                    <motion.div variants={cardVariants} className="flex justify-center pt-4">
-                        <button
-                            onClick={() => navigate('/calendar')}
-                            className="flex items-center gap-3 bg-[rgba(255,255,255,0.05)] px-6 py-3 rounded-full border border-white/10 hover:bg-white/10 transition-all font-bold group text-sm md:text-base"
-                        >
-                            <FaArrowRight className="rotate-0 group-hover:translate-x-1 transition-transform" />
-                            <span>العودة لخريطة الرحلة</span>
-                        </button>
-                    </motion.div>
                 </motion.div>
             </div>
         </div>

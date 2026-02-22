@@ -9,8 +9,8 @@ const EidCountdown = () => {
     const navigate = useNavigate();
 
     // Set Eid Date (Approximate for 2026)
-    // Ramadan 2026 starts approx Feb 17/18. Eid approx March 20, 2026.
-    const eidDate = new Date('2026-03-20T00:00:00').getTime();
+    // Expected Eid date (30 days from Feb 19, 2026 = March 21, 2026)
+    const eidDate = new Date('2026-03-21T00:00:00').getTime();
 
     const [timeLeft, setTimeLeft] = useState({
         days: 0,
