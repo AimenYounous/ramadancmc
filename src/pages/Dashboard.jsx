@@ -108,7 +108,7 @@ const Dashboard = () => {
                 <div className="h-6 w-[1px] bg-white/20 mx-2"></div>
                 <img src={aigImg} alt="AIG" className="h-10 md:h-16 object-contain" />
                 <div className="h-6 w-[1px] bg-white/20 mx-2"></div>
-                <img src={diaImg} alt="DIA" className="h-10 md:h-16 object-contain dark:invert" />
+                <img src={diaImg} alt="DIA" className="h-10 md:h-16 object-contain" />
                 <div className="h-6 w-[1px] bg-white/20 mx-2"></div>
                 <img src={cmcImg} alt="CMC" className="h-10 md:h-16 object-contain" />
             </motion.div>
