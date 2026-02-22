@@ -4,6 +4,7 @@ import GameLobby from './pages/GameLobby';
 import Calendar from './pages/Calendar';
 import PrayerTimes from './pages/PrayerTimes';
 import EidCountdown from './pages/EidCountdown';
+import QuizIntro from './pages/QuizIntro';
 import Quiz from './pages/Quiz';
 import Result from './pages/Result';
 import Leaderboard from './pages/Leaderboard';
@@ -26,6 +27,7 @@ function App() {
                         <Route path="/calendar/day/:dayNum" element={<DayDetail />} />
                         <Route path="/prayer-times" element={<PrayerTimes />} />
                         <Route path="/eid-countdown" element={<EidCountdown />} />
+                        <Route path="/quiz-intro" element={<QuizIntro />} />
                         <Route path="/quiz" element={<Quiz />} />
                         <Route path="/games/word-crush" element={<WordCrush />} />
                         <Route path="/results" element={<Result />} />

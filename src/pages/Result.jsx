@@ -21,10 +21,12 @@ const Result = () => {
         return null;
     }
 
-    const { score, correctCount, total } = state;
+    const { score, correctCount, total, status } = state;
+    const isWin = status === 'win';
     const percentage = Math.round((correctCount / total) * 100);
 
     const getMotivationalMessage = () => {
+        if (!isWin) return "للأسف، لقد استنفدت جميع محاولاتك. لا تيأس، حاول مرة أخرى!";
         if (percentage === 100) return "ما شاء الله! إجابات مثالية. بارك الله في علمك.";
         if (percentage >= 80) return "أحسنت! أداء رائع جداً. بارك الله فيك.";
         if (percentage >= 50) return "أداء جيد، استمر في طلب العلم زادك الله نوراً.";
@@ -33,7 +35,7 @@ const Result = () => {
 
     return (
         <div className="min-h-screen relative flex flex-col items-center justify-center p-4 bg-[#0a0f0d]" dir="rtl">
-            {percentage >= 70 && <Confetti width={windowSize.width} height={windowSize.height} recycle={false} numberOfPieces={500} />}
+            {isWin && percentage >= 70 && <Confetti width={windowSize.width} height={windowSize.height} recycle={false} numberOfPieces={500} />}
             <ParticlesBackground />
 
             <motion.div
@@ -44,7 +46,7 @@ const Result = () => {
             >
                 <div className="bg-[rgba(20,30,25,0.85)] backdrop-blur-2xl p-8 md:p-12 text-center rounded-[40px] border border-[rgba(255,255,255,0.1)] shadow-2xl relative overflow-hidden">
                     {/* Glow Background */}
-                    <div className="absolute -top-24 -left-24 w-64 h-64 bg-[var(--color-accent)] opacity-10 rounded-full blur-[80px]"></div>
+                    <div className={`absolute -top-24 -left-24 w-64 h-64 ${isWin ? 'bg-[var(--color-accent)]' : 'bg-red-500'} opacity-10 rounded-full blur-[80px]`}></div>
                     <div className="absolute -bottom-24 -right-24 w-64 h-64 bg-green-500 opacity-5 rounded-full blur-[80px]"></div>
 
                     <div className="relative z-10">
@@ -52,16 +54,22 @@ const Result = () => {
                             initial={{ scale: 0, rotate: -20 }}
                             animate={{ scale: 1, rotate: 0 }}
                             transition={{ type: "spring", stiffness: 200, damping: 12, delay: 0.2 }}
-                            className="relative mb-8"
+                            className="relative mb-8 flex justify-center"
                         >
                             <img
-                                src="/assets/gagnant.png"
-                                alt="Winner"
-                                className="w-48 h-auto mx-auto drop-shadow-[0_0_20px_rgba(218,165,32,0.5)]"
+                                src={isWin ? "/assets/gagnant.png" : "/assets/defaite.png"}
+                                alt={isWin ? "Winner" : "Defeat"}
+                                className="w-48 h-auto drop-shadow-[0_0_20px_rgba(218,165,32,0.5)]"
                             />
                         </motion.div>
 
-                        <h1 className="text-3xl md:text-4xl font-black text-white mb-8">نتيجة المسابقة</h1>
+                        <h1 className="text-3xl md:text-4xl font-black text-white mb-4">
+                            {isWin ? "تم إكمال التحدي!" : "انتهت المحاولات"}
+                        </h1>
+
+                        <p className="text-gray-400 mb-8 font-medium">
+                            {getMotivationalMessage()}
+                        </p>
 
                         <div className="grid grid-cols-2 gap-4 mb-8">
                             <div className="bg-[rgba(255,255,255,0.03)] p-6 rounded-[24px] border border-[rgba(255,255,255,0.05)]">
@@ -82,18 +90,18 @@ const Result = () => {
                             <motion.button
                                 whileHover={{ scale: 1.02 }}
                                 whileTap={{ scale: 0.98 }}
-                                onClick={() => navigate('/games')}
+                                onClick={() => navigate('/quiz-intro')}
                                 className="w-full bg-[var(--color-accent)] hover:bg-[#b8860b] text-black font-black py-4 rounded-2xl shadow-lg transition-all flex items-center justify-center gap-2"
                             >
-                                <FaRedo /> اللعب مجدداً
+                                <FaRedo /> خوض التحدي من جديد
                             </motion.button>
                             <motion.button
                                 whileHover={{ scale: 1.02 }}
                                 whileTap={{ scale: 0.98 }}
-                                onClick={() => navigate('/')}
+                                onClick={() => navigate('/games')}
                                 className="w-full bg-white/5 hover:bg-white/10 text-white font-bold py-4 rounded-2xl border border-white/10 transition-all flex items-center justify-center gap-2"
                             >
-                                <FaHome /> العودة للرئيسية
+                                <FaHome /> العودة لقائمة التحديات
                             </motion.button>
                         </div>
                     </div>

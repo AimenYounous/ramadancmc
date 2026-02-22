@@ -1,58 +1,74 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { FaClock, FaCheck, FaTimes, FaQuestionCircle } from 'react-icons/fa';
+import { FaClock, FaCheck, FaTimes, FaQuestionCircle, FaHeart, FaDoorOpen } from 'react-icons/fa';
 import ParticlesBackground from '../components/ParticlesBackground';
 import SubPageHeader from '../components/SubPageHeader';
 import { questions } from '../data/questions';
 import WinnerOverlay from '../components/WinnerOverlay';
+import { useQuiz } from '../context/QuizContext';
 
 const Quiz = () => {
     const navigate = useNavigate();
+    const { playerName, gameState, updateGameState, resetGame, saveGameResult } = useQuiz();
+    const [sessionQuestions, setSessionQuestions] = useState([]);
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
     const [selectedAnswer, setSelectedAnswer] = useState(null);
     const [score, setScore] = useState(0);
     const [correctCount, setCorrectCount] = useState(0);
+    const [wrongCount, setWrongCount] = useState(0);
     const [timeLeft, setTimeLeft] = useState(15);
     const [isAnswered, setIsAnswered] = useState(false);
     const [quizStarted, setQuizStarted] = useState(false);
     const [showWinner, setShowWinner] = useState(false);
+    const [lives, setLives] = useState(3);
 
-    // Initial delay for smooth transition
+    // Initial check for player name and randomize questions
     useEffect(() => {
+        if (!playerName) {
+            navigate('/quiz-intro');
+            return;
+        }
+
+        // Randomize and pick 15 questions
+        const shuffled = [...questions].sort(() => 0.5 - Math.random());
+        setSessionQuestions(shuffled.slice(0, 15));
+
+        resetGame();
         const timer = setTimeout(() => setQuizStarted(true), 500);
         return () => clearTimeout(timer);
-    }, []);
+    }, [playerName, resetGame, navigate]);
 
-    const currentQuestion = questions[currentQuestionIndex];
+    const currentQuestion = sessionQuestions[currentQuestionIndex];
+
+    const finishQuiz = useCallback((status = 'completed') => {
+        if (status === 'completed') {
+            setShowWinner(true);
+            saveGameResult(score, correctCount, wrongCount);
+            setTimeout(() => {
+                navigate('/results', { state: { score, correctCount, total: 15, status: 'win' } });
+            }, 2500);
+        } else if (status === 'lost') {
+            saveGameResult(score, correctCount, wrongCount);
+            navigate('/results', { state: { score, correctCount, total: 15, status: 'loss' } });
+        } else {
+            // Aborted/Left
+            navigate('/games');
+        }
+    }, [score, correctCount, wrongCount, navigate, saveGameResult]);
 
     const handleNextQuestion = useCallback(() => {
-        if (currentQuestionIndex < questions.length - 1) {
+        if (currentQuestionIndex < 14) {
             setCurrentQuestionIndex(prev => prev + 1);
             setSelectedAnswer(null);
             setIsAnswered(false);
             setTimeLeft(15);
         } else {
-            // Finish Quiz
-            setShowWinner(true);
-            setTimeout(() => {
-                navigate('/results', { state: { score, correctCount, total: questions.length } });
-            }, 2500);
+            finishQuiz('completed');
         }
-    }, [currentQuestionIndex, score, correctCount, navigate]);
+    }, [currentQuestionIndex, finishQuiz]);
 
-    useEffect(() => {
-        if (quizStarted && !isAnswered && timeLeft > 0) {
-            const timer = setInterval(() => {
-                setTimeLeft(prev => prev - 1);
-            }, 1000);
-            return () => clearInterval(timer);
-        } else if (timeLeft === 0 && !isAnswered) {
-            handleAnswer(-1); // Time's up
-        }
-    }, [timeLeft, isAnswered, quizStarted]);
-
-    const handleAnswer = (index) => {
+    const handleAnswer = useCallback((index) => {
         if (isAnswered) return;
 
         setSelectedAnswer(index);
@@ -60,45 +76,98 @@ const Quiz = () => {
 
         const isCorrect = index === currentQuestion.correctIndex;
         if (isCorrect) {
-            setScore(prev => prev + 10 + timeLeft);
+            const pointsGained = 10 + timeLeft;
+            setScore(prev => prev + pointsGained);
             setCorrectCount(prev => prev + 1);
+            updateGameState(score + pointsGained, true);
+        } else {
+            setWrongCount(prev => prev + 1);
+            const newLives = lives - 1;
+            setLives(newLives);
+            updateGameState(score, false);
+
+            if (newLives <= 0) {
+                setTimeout(() => finishQuiz('lost'), 1500);
+                return;
+            }
         }
 
         // Delay before next question
         setTimeout(() => {
             handleNextQuestion();
         }, 1500);
+    }, [isAnswered, currentQuestion, timeLeft, score, updateGameState, lives, finishQuiz, handleNextQuestion]);
+
+    useEffect(() => {
+        if (quizStarted && !isAnswered && timeLeft > 0) {
+            const timer = setInterval(() => {
+                setTimeLeft(prev => prev - 1);
+            }, 1000);
+            return () => clearInterval(timer);
+        } else if (quizStarted && timeLeft === 0 && !isAnswered) {
+            handleAnswer(-1); // Time's up
+        }
+    }, [timeLeft, isAnswered, quizStarted, handleAnswer]);
+
+    const handleLeave = () => {
+        if (window.confirm('هل أنت متأكد من مغادرة التحدي؟ سيتم احتساب 0 نقطة.')) {
+            finishQuiz('aborted');
+        }
     };
 
     if (!currentQuestion) return null;
 
-    const progress = ((currentQuestionIndex + 1) / questions.length) * 100;
+    const progress = ((currentQuestionIndex + 1) / 15) * 100;
 
     return (
         <div className="min-h-screen relative flex flex-col items-center bg-[#0a0f0d]" dir="rtl">
             <SubPageHeader title="تحدي المعلومات" />
             <ParticlesBackground />
 
-            <div className="z-10 w-full max-w-2xl px-4 py-8">
+            {/* Leave Button */}
+            <div className="absolute top-6 left-6 z-20">
+                <button
+                    onClick={handleLeave}
+                    className="flex items-center gap-2 bg-red-600/10 hover:bg-red-600/20 text-red-500 px-4 py-2 rounded-xl border border-red-500/20 transition-all font-bold text-sm"
+                >
+                    <FaDoorOpen /> مغادرة
+                </button>
+            </div>
+
+            <div className="z-10 w-full max-w-2xl px-4 py-8 mt-12">
                 {/* Header Info */}
-                <div className="flex justify-between items-center mb-6 text-white bg-[rgba(255,255,255,0.03)] backdrop-blur-xl p-4 rounded-2xl border border-[rgba(255,255,255,0.1)]">
+                <div className="grid grid-cols-4 gap-2 md:gap-4 mb-6 text-white bg-[rgba(255,255,255,0.03)] backdrop-blur-xl p-4 md:p-6 rounded-2xl border border-[rgba(255,255,255,0.1)]">
                     <div className="flex flex-col">
-                        <span className="text-xs text-gray-400">السؤال</span>
-                        <span className="text-xl font-bold font-mono">
-                            {currentQuestionIndex + 1} / {questions.length}
+                        <span className="text-[10px] md:text-xs text-gray-400">السؤال</span>
+                        <span className="text-base md:text-xl font-bold font-mono">
+                            {currentQuestionIndex + 1} / 15
                         </span>
                     </div>
 
                     <div className="flex flex-col items-center">
                         <FaClock className={`mb-1 ${timeLeft <= 5 ? 'text-red-500 animate-pulse' : 'text-[var(--color-accent)]'}`} />
-                        <div className={`text-2xl font-black font-mono ${timeLeft <= 5 ? 'text-red-500' : 'text-white'}`}>
+                        <div className={`text-xl md:text-2xl font-black font-mono ${timeLeft <= 5 ? 'text-red-500' : 'text-white'}`}>
                             {timeLeft}
                         </div>
                     </div>
 
+                    <div className="flex flex-col items-center">
+                        <span className="text-[10px] md:text-xs text-gray-400">النقاط</span>
+                        <span className="text-xl md:text-2xl font-black text-[var(--color-accent)]">
+                            {score}
+                        </span>
+                    </div>
+
                     <div className="flex flex-col items-end">
-                        <span className="text-xs text-gray-400">النقاط</span>
-                        <span className="text-xl font-bold text-[var(--color-accent)]">{score}</span>
+                        <span className="text-[10px] md:text-xs text-gray-400">المحاولات</span>
+                        <div className="flex gap-1 mt-1">
+                            {[...Array(3)].map((_, i) => (
+                                <FaHeart
+                                    key={i}
+                                    className={`text-sm md:text-base ${i < lives ? 'text-red-500' : 'text-gray-700'} transition-colors duration-300`}
+                                />
+                            ))}
+                        </div>
                     </div>
                 </div>
 
@@ -120,7 +189,7 @@ const Quiz = () => {
                         animate={{ opacity: 1, x: 0 }}
                         exit={{ opacity: 0, x: -20 }}
                         transition={{ duration: 0.4 }}
-                        className="bg-[rgba(20,30,25,0.8)] backdrop-blur-2xl p-8 md:p-10 rounded-[32px] border border-[rgba(255,255,255,0.1)] shadow-2xl"
+                        className="bg-[rgba(20,30,25,0.8)] backdrop-blur-2xl p-8 md:p-10 rounded-[32px] border border-[rgba(255,255,255,0.1)] shadow-2xl relative"
                     >
                         <div className="flex items-center gap-3 mb-6">
                             <FaQuestionCircle className="text-[var(--color-accent)] text-xl" />
