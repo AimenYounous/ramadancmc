@@ -14,7 +14,7 @@ export const QuizProvider = ({ children }) => {
     const [registeredPlayers, setRegisteredPlayers] = useLocalStorage('cmc-quiz-players', []);
 
     // Session State
-    const [playerName, setPlayerName] = useState('');
+    const [playerName, setPlayerName] = useLocalStorage('cmc-quiz-player-name', '');
     const [gameState, setGameState] = useState({
         score: 0,
         correctAnswers: 0,

@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 import { FaArrowRight } from 'react-icons/fa';
 import cmcRamadanImg from '/assets/cmc_ramadan.png';
 
-const SubPageHeader = ({ title, showHome = true, backLabel = "عودة للتحديات", backPath = "/", onBack = null }) => {
+const SubPageHeader = ({ title, showHome = true, backLabel = "الرئيسية", backPath = "/", onBack = null }) => {
     const navigate = useNavigate();
 
     const handleBack = () => {

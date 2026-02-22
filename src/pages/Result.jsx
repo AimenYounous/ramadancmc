@@ -90,7 +90,7 @@ const Result = () => {
                             <motion.button
                                 whileHover={{ scale: 1.02 }}
                                 whileTap={{ scale: 0.98 }}
-                                onClick={() => navigate('/quiz-intro')}
+                                onClick={() => navigate('/quiz')}
                                 className="w-full bg-[var(--color-accent)] hover:bg-[#b8860b] text-black font-black py-4 rounded-2xl shadow-lg transition-all flex items-center justify-center gap-2"
                             >
                                 <FaRedo /> خوض التحدي من جديد

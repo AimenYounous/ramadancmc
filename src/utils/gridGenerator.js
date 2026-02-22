@@ -74,7 +74,7 @@ const canPlaceWord = (grid, word, row, col, direction, size) => {
         const c = col + i * dc;
         const char = word[i].replace('_', ' '); // Support underscores for space if needed
 
-        if (grid[r][c] !== '' && grid[r][c] !== char) {
+        if (grid[r][c] !== '') {
             return false;
         }
     }

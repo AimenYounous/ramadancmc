@@ -12,10 +12,6 @@ const QuizIntro = () => {
     const navigate = useNavigate();
     const [error, setError] = useState('');
 
-    // Clear session name on mount for fresh input
-    useEffect(() => {
-        setPlayerName('');
-    }, [setPlayerName]);
 
     const handleStart = (e) => {
         e.preventDefault();
