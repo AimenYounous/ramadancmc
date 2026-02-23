@@ -140,7 +140,7 @@ const Quiz = () => {
 
             <div className="z-10 w-full max-w-2xl px-4 py-8 mt-12">
                 {/* Header Info */}
-                <div className="grid grid-cols-4 gap-2 md:gap-4 mb-6 text-white bg-[rgba(255,255,255,0.03)] backdrop-blur-xl p-4 md:p-6 rounded-2xl border border-[rgba(255,255,255,0.1)]">
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 mb-6 text-white bg-[rgba(255,255,255,0.03)] backdrop-blur-xl p-4 md:p-6 rounded-2xl border border-[rgba(255,255,255,0.1)] shadow-xl mt-4 md:mt-0">
                     <div className="flex flex-col">
                         <span className="text-[10px] md:text-xs text-gray-400">السؤال</span>
                         <span className="text-base md:text-xl font-bold font-mono">
@@ -202,7 +202,7 @@ const Quiz = () => {
                             </span>
                         </div>
 
-                        <h2 className="text-2xl md:text-3xl font-bold text-white mb-10 leading-relaxed">
+                        <h2 className="text-xl md:text-3xl font-bold text-white mb-6 md:mb-10 leading-relaxed text-center md:text-right">
                             {currentQuestion.question}
                         </h2>
 

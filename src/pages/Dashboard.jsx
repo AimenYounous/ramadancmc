@@ -102,7 +102,7 @@ const Dashboard = () => {
             <motion.div
                 initial={{ y: -30, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
-                className="z-10 w-full max-w-5xl flex flex-row items-center justify-center gap-6 md:gap-10 pt-4 md:pt-6 opacity-80 shrink-0"
+                className="z-10 w-full max-w-5xl flex flex-wrap items-center justify-center gap-4 md:gap-10 pt-4 md:pt-6 opacity-80 shrink-0"
             >
                 <img src={thrImg} alt="THR" className="h-10 md:h-16 object-contain" />
                 <div className="h-6 w-[1px] bg-white/20 mx-2"></div>
@@ -128,7 +128,7 @@ const Dashboard = () => {
                         className="h-20 md:h-32 object-contain drop-shadow-[0_0_25px_rgba(218,165,32,0.4)]"
                     />
                     <div className="flex flex-col items-center md:items-start pt-1">
-                        <h2 className="text-3xl md:text-5xl text-[var(--color-accent)] leading-tight drop-shadow-[0_0_15px_rgba(218,165,32,0.3)]" style={{ fontFamily: "'RamadanFonts', sans-serif" }}>
+                        <h2 className="text-2xl md:text-5xl text-[var(--color-accent)] leading-tight drop-shadow-[0_0_15px_rgba(218,165,32,0.3)]" style={{ fontFamily: "'RamadanFonts', sans-serif" }}>
                             رمضان كريم
                         </h2>
                         <div className="w-full h-1 bg-gradient-to-l from-[var(--color-accent)] to-transparent opacity-40 mt-1"></div>
@@ -151,7 +151,7 @@ const Dashboard = () => {
                                        bg-[rgba(20,30,25,0.7)] backdrop-blur-2xl border border-[rgba(255,255,255,0.08)]
                                        shadow-[0_10px_30px_-10px_rgba(0,0,0,0.5)]
                                        hover:shadow-[0_20px_40px_-5px_rgba(218,165,32,0.15)]
-                                       transition-all duration-300 ease-out"
+                                       transition-all duration-300 ease-out mb-2 md:mb-0"
                         >
                             <div className="relative z-10 flex flex-col items-center justify-center gap-4">
                                 <div className="w-12 h-12 md:w-14 md:h-14 rounded-full bg-white/5 flex items-center justify-center 

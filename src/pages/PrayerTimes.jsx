@@ -102,14 +102,14 @@ const PrayerTimes = () => {
                                    hover:bg-[rgba(255,255,255,0.1)] hover:border-[var(--color-accent)] hover:translate-x-2 transition-all duration-300 group shadow-lg"
                         >
                             <div className="flex items-center gap-4 md:gap-6">
-                                <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-[rgba(255,255,255,0.05)] flex items-center justify-center text-[var(--color-accent)] text-lg md:text-xl group-hover:bg-[var(--color-accent)] group-hover:text-black transition-colors">
+                                <div className="w-8 h-8 md:w-12 md:h-12 rounded-full bg-[rgba(255,255,255,0.05)] flex items-center justify-center text-[var(--color-accent)] text-sm md:text-xl group-hover:bg-[var(--color-accent)] group-hover:text-black transition-colors">
                                     <prayer.icon />
                                 </div>
-                                <span className="text-lg md:text-2xl font-bold text-white tracking-wide">{prayer.name}</span>
+                                <span className="text-base md:text-2xl font-bold text-white tracking-wide">{prayer.name}</span>
                             </div>
 
-                            <div className="bg-[rgba(0,0,0,0.3)] px-4 md:px-6 py-1.5 md:py-2 rounded-lg border border-[rgba(255,255,255,0.05)] group-hover:border-[var(--color-accent)] transition-colors">
-                                <span className="text-lg md:text-2xl font-mono text-[var(--color-accent)] font-bold ltr" dir="ltr">{prayer.time}</span>
+                            <div className="bg-[rgba(0,0,0,0.3)] px-3 md:px-6 py-1 md:py-2 rounded-lg border border-[rgba(255,255,255,0.05)] group-hover:border-[var(--color-accent)] transition-colors">
+                                <span className="text-base md:text-2xl font-mono text-[var(--color-accent)] font-bold ltr" dir="ltr">{prayer.time}</span>
                             </div>
                         </motion.div>
                     ))}

@@ -64,9 +64,9 @@ const JourneyMap = ({ currentDay = 5 }) => {
         <div className="relative w-full h-[calc(100vh-140px)] flex items-center justify-center overflow-hidden p-4 perspective-1000">
             {/* 3D Depth Container */}
             <motion.div
-                className="relative w-full h-full max-w-6xl aspect-[1.6/1] shrink-0 rounded-xl overflow-hidden shadow-[0_50px_100px_-20px_rgba(0,0,0,0.8)] ramadan-geometric-pattern emerald-silk"
+                className="relative w-full h-full max-w-6xl aspect-[1.1/1] sm:aspect-[1.6/1] shrink-0 rounded-xl overflow-hidden shadow-[0_50px_100px_-20px_rgba(0,0,0,0.8)] ramadan-geometric-pattern emerald-silk"
                 initial={{ rotateX: 20, y: 50, opacity: 0 }}
-                animate={{ rotateX: 5, y: 0, opacity: 1 }}
+                animate={{ rotateX: window.innerWidth < 768 ? 2 : 5, y: 0, opacity: 1 }}
                 transition={{ duration: 1.2, ease: "easeOut" }}
                 style={{ transformStyle: "preserve-3d" }}
             >

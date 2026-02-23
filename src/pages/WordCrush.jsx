@@ -78,13 +78,14 @@ const WordCrush = () => {
                 setSelection(newSelection);
 
                 const currentString = newSelection.map(s => s.letter).join('');
-                if (level.words.includes(currentString) && !foundWords.includes(currentString)) {
+                const wordsToFind = gridData.placedWords.map(pw => pw.word);
+                if (wordsToFind.includes(currentString) && !foundWords.includes(currentString)) {
                     setFoundWords(prev => [...prev, currentString]);
                     setFoundCells(prev => [...prev, ...newSelection.map(s => `${s.row}-${s.col}`)]);
                     setSelection([]);
                     setMessage(`ممتاز! وجدت كلمة: ${currentString}`);
                     setTimeout(() => setMessage(''), 2000);
-                } else if (newSelection.length > Math.max(...level.words.map(w => w.length))) {
+                } else if (newSelection.length > Math.max(...wordsToFind.map(w => w.length), 0)) {
                     setSelection([]);
                 }
             } else {
@@ -97,7 +98,8 @@ const WordCrush = () => {
         if (hintsAvailable <= 0 || isLevelComplete) return;
 
         // Find a word not yet found
-        const remainingWords = level.words.filter(w => !foundWords.includes(w));
+        const wordsToFind = gridData.placedWords.map(pw => pw.word);
+        const remainingWords = wordsToFind.filter(w => !foundWords.includes(w));
         if (remainingWords.length === 0) return;
 
         const targetWord = remainingWords[Math.floor(Math.random() * remainingWords.length)];
@@ -124,10 +126,11 @@ const WordCrush = () => {
     };
 
     useEffect(() => {
-        if (foundWords.length === level.words.length && level.words.length > 0) {
+        const wordsToFind = gridData.placedWords.map(pw => pw.word);
+        if (foundWords.length === wordsToFind.length && wordsToFind.length > 0) {
             setTimeout(() => setIsLevelComplete(true), 500);
         }
-    }, [foundWords, level.words.length]);
+    }, [foundWords, gridData.placedWords]);
 
     const nextLevel = () => {
         if (currentLevel < wordGames.levels.length - 1) {
@@ -197,7 +200,7 @@ const WordCrush = () => {
 
                         <div className="flex-1 overflow-y-auto custom-scrollbar px-1">
                             <div className="grid grid-cols-1 gap-2.5">
-                                {level.words.map((word, i) => {
+                                {level.words.filter(w => gridData.placedWords.some(pw => pw.word === w)).map((word, i) => {
                                     const isFound = foundWords.includes(word);
                                     return (
                                         <motion.div
@@ -212,7 +215,7 @@ const WordCrush = () => {
                                                     <div key={idx} className={`w-2.5 h-2.5 rounded-[2px] transition-all duration-700 ${isFound ? 'bg-green-500 shadow-[0_0_8px_rgba(34,197,94,0.6)] scale-110' : 'bg-white/10'}`}></div>
                                                 ))}
                                             </div>
-                                            <span className={`text-base font-black tracking-widest ${isFound ? 'line-through opacity-20 italic' : ''}`}>
+                                            <span className={`text-sm md:text-base font-black tracking-widest ${isFound ? 'line-through opacity-20 italic' : ''}`}>
                                                 {isFound ? word : '⬜'.repeat(word.length)}
                                             </span>
                                         </motion.div>
@@ -261,7 +264,7 @@ const WordCrush = () => {
                 {/* Right Panel: Game Grid - MAXIMIZED */}
                 <div className="flex-1 flex items-center justify-center relative min-h-0">
                     <div
-                        className="bg-[rgba(20,30,25,0.85)] backdrop-blur-3xl p-3 md:p-6 rounded-[50px] border border-white/5 shadow-[0_0_100px_rgba(0,0,0,0.6)] relative overflow-hidden flex items-center justify-center w-full h-full max-w-[min(100%,88vh)] aspect-square"
+                        className="bg-[rgba(20,30,25,0.85)] backdrop-blur-3xl p-2 md:p-6 rounded-[32px] md:rounded-[50px] border border-white/5 shadow-[0_0_100px_rgba(0,0,0,0.6)] relative overflow-hidden flex items-center justify-center w-full h-full max-w-[min(100%,88vh)] aspect-square"
                     >
                         {/* Interactive Message Overlay */}
                         <AnimatePresence>
@@ -297,10 +300,10 @@ const WordCrush = () => {
                                             whileHover={!isFound ? { scale: 1.04, zIndex: 10 } : {}}
                                             whileTap={!isFound ? { scale: 0.96 } : {}}
                                             onClick={() => handleCellAction(rowIndex, colIndex, letter)}
-                                            className={`aspect-square flex items-center justify-center text-sm sm:text-lg md:text-3xl font-black rounded-xl md:rounded-2xl border transition-all duration-300 relative ${isFound
-                                                ? 'bg-green-600/25 border-green-500/50 text-green-400 shadow-[inset_0_0_15px_rgba(34,197,94,0.3)]'
-                                                : isSelected
-                                                    ? 'bg-[var(--color-accent)] text-black border-[var(--color-accent)] z-10 shadow-[0_0_30px_rgba(218,165,32,0.6)] scale-105'
+                                            className={`aspect-square flex items-center justify-center text-[10px] xs:text-xs sm:text-lg md:text-3xl font-black rounded-lg md:rounded-2xl border transition-all duration-300 relative ${isSelected
+                                                ? 'bg-[var(--color-accent)] text-black border-[var(--color-accent)] z-10 shadow-[0_0_30px_rgba(218,165,32,0.6)] scale-105'
+                                                : isFound
+                                                    ? 'bg-green-600/25 border-green-500/50 text-green-400 shadow-[inset_0_0_15px_rgba(34,197,94,0.3)]'
                                                     : isHinted
                                                         ? 'bg-yellow-500/20 border-yellow-500/80 text-yellow-400 shadow-[0_0_20px_rgba(234,179,8,0.5)] animate-bounce-slow z-10'
                                                         : 'bg-white/[0.03] border-white/10 text-white/90'

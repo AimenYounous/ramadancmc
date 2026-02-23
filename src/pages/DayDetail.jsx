@@ -57,7 +57,7 @@ const DayDetail = () => {
 
             <div className="flex-1 flex flex-col items-center justify-center py-4 md:py-8">
                 <motion.div
-                    className="z-10 w-full max-w-4xl mx-auto px-6 flex flex-col gap-3 md:gap-4"
+                    className="z-10 w-full max-w-4xl mx-auto px-4 md:px-6 flex flex-col gap-3 md:gap-4 mt-4 md:mt-0"
                     variants={containerVariants}
                     initial="hidden"
                     animate="visible"
@@ -68,7 +68,7 @@ const DayDetail = () => {
                         className="bg-[rgba(20,30,25,0.85)] backdrop-blur-3xl p-5 md:p-6 rounded-[24px] border border-emerald-500/30 shadow-xl relative overflow-hidden text-center group flex flex-col items-center justify-center min-h-[120px]"
                     >
                         <div className="absolute top-0 right-0 w-24 h-24 bg-emerald-500/10 rounded-full blur-[30px] -mr-12 -mt-12"></div>
-                        <h2 className="text-xl md:text-3xl font-black text-[var(--color-accent)] leading-relaxed mb-2 drop-shadow-glow" style={{ fontFamily: "'ArabicFont', 'Cairo', serif" }}>
+                        <h2 className="text-lg md:text-3xl font-black text-[var(--color-accent)] leading-[1.6] mb-2 drop-shadow-glow" style={{ fontFamily: "'ArabicFont', 'Cairo', serif" }}>
                             {data.ayah}
                         </h2>
                         {data.surah && (
@@ -92,7 +92,7 @@ const DayDetail = () => {
                             <FaPray className="text-amber-400 text-lg opacity-60" />
                             <h3 className="text-base font-bold text-amber-100 mb-0">دعاء اليوم</h3>
                         </div>
-                        <p className="text-lg md:text-xl text-amber-50 leading-relaxed font-bold">
+                        <p className="text-base md:text-xl text-amber-50 leading-relaxed font-bold">
                             {data.dua}
                         </p>
                     </motion.div>

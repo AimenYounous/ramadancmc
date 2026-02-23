@@ -1,0 +1,27 @@
+DELIMITER $$
+CREATE PROCEDURE mise_a_jour()
+    BEGIN
+        DECLARE qte_dispo INT;
+        DECLARE art_id INT;
+        DECLARE qte_entre INT;
+        DECLARE qte_sorte INT;
+        DECLARE CONTINUE HANDLER FOR NOT FOUND set f = 0;
+        #cursor article
+        DECLARE cur_art CURSOR FOR SELECT id FROM article ;
+        #cursor entree
+        DECLARE cur_entr CURSOR FOR SELECT qte FROM entree WHERE article_id = art_id;
+        #cursor article
+        DECLARE cur_sort CURSOR FOR SELECT qte FROM soriee WHERE article_id = art_id;
+
+        LOOP:b
+            FETCH cur_art INTO art_id;
+            FETCH cur_entr INTO qte_entre;
+            FETCH cur_sort INTO qte_sorte;
+            IF f=0 THEN 
+                LEAVE b;
+            END IF 
+            SET qte_dispo = qte_entre - qte_sorte;
+            UPDATE articles SET stock_dispo = qte_dispo WHERE id = art_id;
+        END LOOP b
+    END $$
+DELIMITER ;

@@ -54,7 +54,7 @@ const TopicDetail = () => {
                     initial={{ opacity: 0, y: 30 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8 }}
-                    className="bg-white/5 backdrop-blur-2xl border border-white/10 rounded-[20px] p-8 md:p-12 shadow-[0_0_50px_rgba(212,175,55,0.1)] relative overflow-hidden transition-all duration-300"
+                    className="bg-white/5 backdrop-blur-2xl border border-white/10 rounded-[20px] p-5 md:p-12 shadow-[0_0_50px_rgba(212,175,55,0.1)] relative overflow-hidden transition-all duration-300"
                 >
                     {/* Subtle Top Glow Line */}
                     <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-[var(--color-accent)]/40 to-transparent" />
@@ -62,7 +62,7 @@ const TopicDetail = () => {
                     {/* Top Section: Header */}
                     <div className="flex justify-between items-start mb-12">
                         <div className="flex-1 text-right">
-                            <h1 className="text-4xl md:text-5xl font-black text-white gold-glow-text mb-3 leading-tight">
+                            <h1 className="text-2xl md:text-5xl font-black text-white gold-glow-text mb-3 leading-tight">
                                 {topic.title}
                             </h1>
                             <p className="text-gray-400 text-lg font-medium opacity-80">
@@ -82,7 +82,7 @@ const TopicDetail = () => {
                                 <h3 className="text-[var(--color-accent)] font-bold text-lg uppercase tracking-wider opacity-80">المنطلق الرباني</h3>
                             </div>
                             <div className="bg-black/20 p-8 rounded-2xl border border-white/5 relative">
-                                <p className="text-3xl md:text-4xl text-center font-serif text-[var(--color-accent)] leading-relaxed mb-6" style={{ fontFamily: "'Reem Kufi', serif" }}>
+                                <p className="text-xl md:text-4xl text-center font-serif text-[var(--color-accent)] leading-relaxed mb-6" style={{ fontFamily: "'Reem Kufi', serif" }}>
                                     " {topic.verse} "
                                 </p>
                                 <div className="w-12 h-[1px] bg-[var(--color-accent)]/20 mx-auto mb-6" />

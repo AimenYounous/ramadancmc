@@ -14,10 +14,10 @@ const MemoryGame = () => {
             >
                 <FaArrowRight /> العودة للألعاب
             </button>
-            <div className="z-10 text-center glass-card p-10 max-w-lg w-full">
-                <FaBrain className="mx-auto text-6xl text-[var(--color-accent)] mb-6" />
-                <h1 className="text-4xl font-bold mb-4 text-white">لعبة الذاكرة</h1>
-                <p className="text-xl text-gray-300">هذه اللعبة قيد التطوير...</p>
+            <div className="z-10 text-center glass-card p-6 md:p-10 max-w-lg w-full">
+                <FaBrain className="mx-auto text-4xl md:text-6xl text-[var(--color-accent)] mb-6" />
+                <h1 className="text-2xl md:text-4xl font-bold mb-4 text-white">لعبة الذاكرة</h1>
+                <p className="text-lg md:text-xl text-gray-300">هذه اللعبة قيد التطوير...</p>
             </div>
         </div>
     );

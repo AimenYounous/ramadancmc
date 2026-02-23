@@ -75,7 +75,7 @@ const TopicList = () => {
                                     whileHover={{ scale: 1.01, x: -5 }}
                                     whileTap={{ scale: 0.99 }}
                                     onClick={() => navigate(`/self-development/${categoryId}/${topic.id}`)}
-                                    className={`flex items-center justify-between p-6 rounded-2xl border transition-all duration-300
+                                    className={`flex items-center justify-between p-4 md:p-6 rounded-2xl border transition-all duration-300
                                            ${isCompleted
                                             ? 'bg-[var(--color-accent)]/10 border-[var(--color-accent)]/30'
                                             : 'bg-white/5 border-white/10 hover:border-white/30'}`}
@@ -85,7 +85,7 @@ const TopicList = () => {
                                                   ${isCompleted ? 'bg-[var(--color-accent)] text-black' : 'bg-white/10 text-gray-400'}`}>
                                             {isCompleted ? <FaCheckCircle className="text-xl" /> : <FaRegCircle className="text-xl" />}
                                         </div>
-                                        <h3 className={`text-xl font-bold transition-colors ${isCompleted ? 'text-[var(--color-accent)]' : 'text-white group-hover:text-[var(--color-accent)]'}`}>
+                                        <h3 className={`text-lg md:text-xl font-bold transition-colors ${isCompleted ? 'text-[var(--color-accent)]' : 'text-white group-hover:text-[var(--color-accent)]'}`}>
                                             {topic.title}
                                         </h3>
                                     </div>
