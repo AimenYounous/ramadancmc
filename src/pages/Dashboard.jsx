@@ -1,7 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { FaCalendarAlt, FaMosque, FaClock, FaGamepad, FaBrain } from 'react-icons/fa';
+import { FaCalendarAlt, FaMosque, FaGamepad, FaBrain } from 'react-icons/fa';
 import ParticlesBackground from '../components/ParticlesBackground';
 import fanosImg from '/assets/fanos.png';
 import hilalImg from '/assets/hilal.png';
@@ -46,14 +46,14 @@ const Dashboard = () => {
     ];
 
     return (
-        <div className="min-h-screen relative flex flex-col items-center p-6 md:p-10 overflow-hidden" dir="rtl">
+        <div className="min-h-screen relative flex flex-col items-center p-6 md:p-10 [&_@media(min-width:2600px)]:p-32 overflow-hidden" dir="rtl">
             <ParticlesBackground />
 
             {/* Bottom Floating Fanos */}
             <motion.img
                 src={fanosImg}
                 alt="Fanos Left"
-                className="absolute bottom-4 left-4 w-16 md:w-24 z-20 pointer-events-none opacity-80"
+                className="absolute bottom-4 left-4 w-16 md:w-24 [&_@media(min-width:2600px)]:w-64 z-20 pointer-events-none opacity-80"
                 animate={{
                     y: [0, -15, 0],
                     rotate: [-5, 5, -5]
@@ -67,7 +67,7 @@ const Dashboard = () => {
             <motion.img
                 src={fanosImg}
                 alt="Fanos Right"
-                className="absolute bottom-4 right-4 w-16 md:w-24 z-20 pointer-events-none opacity-80 scale-x-[-1]"
+                className="absolute bottom-4 right-4 w-16 md:w-24 [&_@media(min-width:2600px)]:w-64 z-20 pointer-events-none opacity-80 scale-x-[-1]"
                 animate={{
                     y: [-15, 0, -15],
                     rotate: [5, -5, 5]
@@ -84,7 +84,7 @@ const Dashboard = () => {
             <motion.img
                 src={hilalImg}
                 alt="Hilal Left"
-                className="absolute top-0 left-0 w-24 md:w-40 z-30 pointer-events-none"
+                className="absolute top-0 left-0 w-24 md:w-40 [&_@media(min-width:2600px)]:w-96 z-30 pointer-events-none"
                 style={{ transformOrigin: "top center" }}
                 animate={{ rotate: [-6, 6, -6] }}
                 transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
@@ -92,25 +92,25 @@ const Dashboard = () => {
             <motion.img
                 src={hilalImg}
                 alt="Hilal Right"
-                className="absolute top-0 right-0 w-24 md:w-40 z-30 pointer-events-none scale-x-[-1]"
+                className="absolute top-0 right-0 w-24 md:w-40 [&_@media(min-width:2600px)]:w-96 z-30 pointer-events-none scale-x-[-1]"
                 style={{ transformOrigin: "top center" }}
                 animate={{ rotate: [6, -6, 6] }}
                 transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
             />
 
-            {/* 1. TOP SECTION: Institutional Logos - Reversed and Resized */}
+            {/* 1. TOP SECTION: Institutional Logos */}
             <motion.div
                 initial={{ y: -30, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
-                className="z-10 w-full max-w-5xl flex flex-wrap items-center justify-center gap-4 md:gap-10 pt-4 md:pt-6 opacity-80 shrink-0"
+                className="z-10 w-full max-w-5xl flex flex-wrap items-center justify-center gap-2 md:gap-10 pt-4 md:pt-6 [&_@media(min-width:2600px)]:pt-10 opacity-80 shrink-0"
             >
-                <img src={thrImg} alt="THR" className="h-10 md:h-16 object-contain" />
-                <div className="h-6 w-[1px] bg-white/20 mx-2"></div>
-                <img src={aigImg} alt="AIG" className="h-10 md:h-16 object-contain" />
-                <div className="h-6 w-[1px] bg-white/20 mx-2"></div>
-                <img src={diaImg} alt="DIA" className="h-10 md:h-16 object-contain" />
-                <div className="h-6 w-[1px] bg-white/20 mx-2"></div>
-                <img src={cmcImg} alt="CMC" className="h-10 md:h-16 object-contain" />
+                <img src={thrImg} alt="THR" className="h-8 md:h-16 [&_@media(min-width:2600px)]:h-40 object-contain" />
+                <div className="h-4 md:h-6 w-[1px] bg-white/20 mx-1 md:mx-2"></div>
+                <img src={aigImg} alt="AIG" className="h-8 md:h-16 [&_@media(min-width:2600px)]:h-40 object-contain" />
+                <div className="h-4 md:h-6 w-[1px] bg-white/20 mx-1 md:mx-2"></div>
+                <img src={diaImg} alt="DIA" className="h-8 md:h-16 [&_@media(min-width:2600px)]:h-40 object-contain" />
+                <div className="h-4 md:h-6 w-[1px] bg-white/20 mx-1 md:mx-2"></div>
+                <img src={cmcImg} alt="CMC" className="h-8 md:h-16 [&_@media(min-width:2600px)]:h-40 object-contain" />
             </motion.div>
 
             {/* MIDDLE & BOTTOM GROUP: Centered together */}
@@ -125,19 +125,19 @@ const Dashboard = () => {
                     <img
                         src={cmcRamadanImg}
                         alt="CMC Ramadan"
-                        className="h-20 md:h-32 object-contain drop-shadow-[0_0_25px_rgba(218,165,32,0.4)]"
+                        className="h-20 md:h-32 [&_@media(min-width:2600px)]:h-80 object-contain drop-shadow-[0_0_25px_rgba(218,165,32,0.4)]"
                     />
                     <div className="flex flex-col items-center md:items-start pt-1">
-                        <h2 className="text-2xl md:text-5xl text-[var(--color-accent)] leading-tight drop-shadow-[0_0_15px_rgba(218,165,32,0.3)]" style={{ fontFamily: "'RamadanFonts', sans-serif" }}>
+                        <h2 className="text-2xl md:text-5xl [&_@media(min-width:2600px)]:text-[9rem] text-[var(--color-accent)] leading-tight drop-shadow-[0_0_15px_rgba(218,165,32,0.3)]" style={{ fontFamily: "'RamadanFonts', sans-serif" }}>
                             رمضان كريم
                         </h2>
-                        <div className="w-full h-1 bg-gradient-to-l from-[var(--color-accent)] to-transparent opacity-40 mt-1"></div>
+                        <div className="w-full h-1 [&_@media(min-width:2600px)]:h-3 bg-gradient-to-l from-[var(--color-accent)] to-transparent opacity-40 mt-1"></div>
                     </div>
                 </motion.div>
 
                 {/* 3. BOTTOM SECTION: Grid Container */}
                 <motion.div
-                    className="w-full max-w-5xl grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 shrink-0"
+                    className="w-full max-w-5xl grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 [&_@media(min-width:2600px)]:gap-24 shrink-0"
                     initial={{ y: 30, opacity: 0 }}
                     animate={{ y: 0, opacity: 1 }}
                     transition={{ duration: 0.5, delay: 0.4 }}
@@ -147,20 +147,20 @@ const Dashboard = () => {
                             key={index}
                             whileHover={{ y: -5, scale: 1.01 }}
                             onClick={() => navigate(item.path)}
-                            className="group relative overflow-hidden rounded-[24px] p-6 md:p-8 text-center
+                            className="group relative overflow-hidden rounded-[24px] p-6 md:p-8 [&_@media(min-width:2600px)]:rounded-[40px] [&_@media(min-width:2600px)]:p-20 text-center
                                        bg-[rgba(20,30,25,0.7)] backdrop-blur-2xl border border-[rgba(255,255,255,0.08)]
                                        shadow-[0_10px_30px_-10px_rgba(0,0,0,0.5)]
                                        hover:shadow-[0_20px_40px_-5px_rgba(218,165,32,0.15)]
                                        transition-all duration-300 ease-out mb-2 md:mb-0"
                         >
                             <div className="relative z-10 flex flex-col items-center justify-center gap-4">
-                                <div className="w-12 h-12 md:w-14 md:h-14 rounded-full bg-white/5 flex items-center justify-center 
+                                <div className="w-12 h-12 md:w-14 md:h-14 [&_@media(min-width:2600px)]:w-32 [&_@media(min-width:2600px)]:h-32 rounded-full bg-white/5 flex items-center justify-center 
                                               group-hover:bg-[var(--color-accent)] group-hover:text-black transition-all duration-300">
-                                    <item.icon className="text-2xl text-[var(--color-accent)] group-hover:text-[var(--color-bg)] transition-colors" />
+                                    <item.icon className="text-2xl [&_@media(min-width:2600px)]:text-6xl text-[var(--color-accent)] group-hover:text-[var(--color-bg)] transition-colors" />
                                 </div>
 
                                 <div className="flex flex-col items-center">
-                                    <h3 className="text-xl md:text-2xl font-bold text-white group-hover:text-[var(--color-accent)] transition-colors m-0">
+                                    <h3 className="text-xl md:text-2xl [&_@media(min-width:2600px)]:text-7xl font-bold text-white group-hover:text-[var(--color-accent)] transition-colors m-0">
                                         {item.title}
                                     </h3>
                                 </div>
@@ -169,9 +169,6 @@ const Dashboard = () => {
                     ))}
                 </motion.div>
             </div>
-
-
-
         </div>
     );
 };

@@ -14,7 +14,7 @@ const DIRECTIONS = [
     [-1, -1]  // Diagonal Up-Left
 ];
 
-const ARABIC_LETTERS = "أبتثجحخدذرزسشصضطظعغفقكلمنهـوي";
+const ARABIC_LETTERS = "أبتثجحخدذرزسشصضطظعغفقكلمنهوي";
 
 export const generateGrid = (size, words) => {
     let finalGrid = null;

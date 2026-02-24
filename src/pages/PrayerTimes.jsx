@@ -65,56 +65,58 @@ const PrayerTimes = () => {
             {/* Standardized Header */}
             <SubPageHeader title="مواقيت الصلاة" />
 
-            <div className="z-10 w-full flex flex-col items-center mb-8 max-w-2xl relative mt-8">
-                <p className="text-gray-400 m-0 bg-white/5 px-4 py-2 rounded-full border border-white/10 backdrop-blur-md">
-                    بتوقيت سيدي جابر - بني ملال
-                </p>
-            </div>
-
-            {loading ? (
-                <div className="flex-1 flex flex-col items-center justify-center z-10">
-                    <FaSpinner className="text-4xl text-[var(--color-accent)] animate-spin mb-4" />
-                    <p className="text-gray-400 animate-pulse">جاري تحميل المواقيت...</p>
+            <div className="flex-1 w-full flex flex-col items-center justify-center z-10">
+                <div className="w-full flex flex-col items-center mb-8 max-w-2xl relative">
+                    <p className="text-gray-400 m-0 bg-white/5 px-4 py-2 rounded-full border border-white/10 backdrop-blur-md">
+                        بتوقيت سيدي جابر - بني ملال
+                    </p>
                 </div>
-            ) : (
-                <motion.div
-                    className="z-10 w-full max-w-2xl flex flex-col gap-4"
-                    initial="hidden"
-                    animate="visible"
-                    variants={{
-                        visible: { transition: { staggerChildren: 0.1 } }
-                    }}
-                >
-                    {error && (
-                        <div className="mb-4 p-3 bg-red-500/10 border border-red-500/20 rounded-xl text-red-400 text-sm text-center">
-                            {error}
-                        </div>
-                    )}
 
-                    {prayers.map((prayer, index) => (
-                        <motion.div
-                            key={index}
-                            variants={{
-                                hidden: { opacity: 0, x: 20 },
-                                visible: { opacity: 1, x: 0 }
-                            }}
-                            className="flex items-center justify-between p-4 md:p-5 rounded-2xl bg-[rgba(20,30,25,0.6)] backdrop-blur-xl border border-[rgba(255,255,255,0.1)] 
-                                   hover:bg-[rgba(255,255,255,0.1)] hover:border-[var(--color-accent)] hover:translate-x-2 transition-all duration-300 group shadow-lg"
-                        >
-                            <div className="flex items-center gap-4 md:gap-6">
-                                <div className="w-8 h-8 md:w-12 md:h-12 rounded-full bg-[rgba(255,255,255,0.05)] flex items-center justify-center text-[var(--color-accent)] text-sm md:text-xl group-hover:bg-[var(--color-accent)] group-hover:text-black transition-colors">
-                                    <prayer.icon />
+                {loading ? (
+                    <div className="flex flex-col items-center justify-center">
+                        <FaSpinner className="text-4xl text-[var(--color-accent)] animate-spin mb-4" />
+                        <p className="text-gray-400 animate-pulse">جاري تحميل المواقيت...</p>
+                    </div>
+                ) : (
+                    <motion.div
+                        className="w-full max-w-2xl flex flex-col gap-4"
+                        initial="hidden"
+                        animate="visible"
+                        variants={{
+                            visible: { transition: { staggerChildren: 0.1 } }
+                        }}
+                    >
+                        {error && (
+                            <div className="mb-4 p-3 bg-red-500/10 border border-red-500/20 rounded-xl text-red-400 text-sm text-center">
+                                {error}
+                            </div>
+                        )}
+
+                        {prayers.map((prayer, index) => (
+                            <motion.div
+                                key={index}
+                                variants={{
+                                    hidden: { opacity: 0, x: 20 },
+                                    visible: { opacity: 1, x: 0 }
+                                }}
+                                className="flex items-center justify-between p-4 md:p-5 rounded-2xl bg-[rgba(20,30,25,0.6)] backdrop-blur-xl border border-[rgba(255,255,255,0.1)] 
+                                       hover:bg-[rgba(255,255,255,0.1)] hover:border-[var(--color-accent)] hover:translate-x-2 transition-all duration-300 group shadow-lg"
+                            >
+                                <div className="flex items-center gap-4 md:gap-6">
+                                    <div className="w-8 h-8 md:w-12 md:h-12 rounded-full bg-[rgba(255,255,255,0.05)] flex items-center justify-center text-[var(--color-accent)] text-sm md:text-xl group-hover:bg-[var(--color-accent)] group-hover:text-black transition-colors">
+                                        <prayer.icon />
+                                    </div>
+                                    <span className="text-base md:text-2xl font-bold text-white tracking-wide">{prayer.name}</span>
                                 </div>
-                                <span className="text-base md:text-2xl font-bold text-white tracking-wide">{prayer.name}</span>
-                            </div>
 
-                            <div className="bg-[rgba(0,0,0,0.3)] px-3 md:px-6 py-1 md:py-2 rounded-lg border border-[rgba(255,255,255,0.05)] group-hover:border-[var(--color-accent)] transition-colors">
-                                <span className="text-base md:text-2xl font-mono text-[var(--color-accent)] font-bold ltr" dir="ltr">{prayer.time}</span>
-                            </div>
-                        </motion.div>
-                    ))}
-                </motion.div>
-            )}
+                                <div className="bg-[rgba(0,0,0,0.3)] px-3 md:px-6 py-1 md:py-2 rounded-lg border border-[rgba(255,255,255,0.05)] group-hover:border-[var(--color-accent)] transition-colors">
+                                    <span className="text-base md:text-2xl font-mono text-[var(--color-accent)] font-bold ltr" dir="ltr">{prayer.time}</span>
+                                </div>
+                            </motion.div>
+                        ))}
+                    </motion.div>
+                )}
+            </div>
 
             {/* Quote */}
             <div className="z-10 mt-12 text-center max-w-lg mb-8">

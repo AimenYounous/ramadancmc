@@ -14,6 +14,7 @@ const WordCrush = () => {
     const [selection, setSelection] = useState([]);
     const [foundWords, setFoundWords] = useState([]);
     const [foundCells, setFoundCells] = useState([]);
+    const [foundWordInstances, setFoundWordInstances] = useState([]); // Array of { word, cells }
     const [hintsAvailable, setHintsAvailable] = useState(5); // Start at 5
     const [hintedCells, setHintedCells] = useState([]); // Array of "r-c"
     const [isLevelComplete, setIsLevelComplete] = useState(false);
@@ -35,6 +36,7 @@ const WordCrush = () => {
         setGridData(data);
         setFoundWords([]);
         setFoundCells([]);
+        setFoundWordInstances([]);
         setSelection([]);
         setHintedCells([]);
         setIsLevelComplete(false);
@@ -54,7 +56,8 @@ const WordCrush = () => {
     const handleCellAction = (row, col, letter) => {
         if (isLevelComplete) return;
         const cellId = `${row}-${col}`;
-        if (foundCells.includes(cellId)) return;
+        // Allow selection even if cell is found to handle overlaps correctly
+
 
         if (selection.length === 0) {
             setSelection([{ row, col, letter }]);
@@ -82,6 +85,7 @@ const WordCrush = () => {
                 if (wordsToFind.includes(currentString) && !foundWords.includes(currentString)) {
                     setFoundWords(prev => [...prev, currentString]);
                     setFoundCells(prev => [...prev, ...newSelection.map(s => `${s.row}-${s.col}`)]);
+                    setFoundWordInstances(prev => [...prev, { word: currentString, cells: [...newSelection] }]);
                     setSelection([]);
                     setMessage(`ممتاز! وجدت كلمة: ${currentString}`);
                     setTimeout(() => setMessage(''), 2000);
@@ -143,12 +147,12 @@ const WordCrush = () => {
     if (gridData.grid.length === 0) return null;
 
     return (
-        <div className="h-screen w-screen relative flex flex-col p-4 md:p-6 bg-[#0a0f0d] overflow-hidden" dir="rtl">
+        <div className="min-h-screen w-full relative flex flex-col p-4 md:p-6 bg-[#0a0f0d] overflow-x-hidden" dir="rtl">
             <ParticlesBackground />
             {isLevelComplete && <Confetti width={windowSize.width} height={windowSize.height} recycle={false} numberOfPieces={600} />}
 
             {/* Top Bar - Very Minimal */}
-            <div className="z-20 w-full flex justify-between items-center mb-3 shrink-0 px-2">
+            <div className="z-20 w-full flex justify-between items-center mb-3 shrink-0 px-2 lg:px-6">
                 <motion.button
                     whileHover={{ scale: 1.05, x: 5 }}
                     onClick={() => navigate('/games')}
@@ -160,7 +164,7 @@ const WordCrush = () => {
             </div>
 
             {/* Main Application Area */}
-            <div className="z-10 flex-1 flex flex-col lg:flex-row gap-4 overflow-hidden min-h-0">
+            <div className="z-10 flex-1 flex flex-col lg:flex-row gap-4 px-2 lg:px-6 mb-6">
 
                 {/* Left Panel: Modular Cards */}
                 <div className="w-full lg:w-80 xl:w-96 flex flex-col gap-3 shrink-0 h-full overflow-hidden">
@@ -262,9 +266,9 @@ const WordCrush = () => {
                 </div>
 
                 {/* Right Panel: Game Grid - MAXIMIZED */}
-                <div className="flex-1 flex items-center justify-center relative min-h-0">
+                <div className="flex-1 flex items-center justify-center relative min-h-[400px] md:min-h-0">
                     <div
-                        className="bg-[rgba(20,30,25,0.85)] backdrop-blur-3xl p-2 md:p-6 rounded-[32px] md:rounded-[50px] border border-white/5 shadow-[0_0_100px_rgba(0,0,0,0.6)] relative overflow-hidden flex items-center justify-center w-full h-full max-w-[min(100%,88vh)] aspect-square"
+                        className="bg-[rgba(20,30,25,0.85)] backdrop-blur-3xl p-2 md:p-6 rounded-[32px] md:rounded-[50px] border border-white/5 shadow-[0_0_100px_rgba(0,0,0,0.6)] relative overflow-hidden flex items-center justify-center w-full max-w-[min(100%,82vh)] aspect-square"
                     >
                         {/* Interactive Message Overlay */}
                         <AnimatePresence>
@@ -303,7 +307,7 @@ const WordCrush = () => {
                                             className={`aspect-square flex items-center justify-center text-[10px] xs:text-xs sm:text-lg md:text-3xl font-black rounded-lg md:rounded-2xl border transition-all duration-300 relative ${isSelected
                                                 ? 'bg-[var(--color-accent)] text-black border-[var(--color-accent)] z-10 shadow-[0_0_30px_rgba(218,165,32,0.6)] scale-105'
                                                 : isFound
-                                                    ? 'bg-green-600/25 border-green-500/50 text-green-400 shadow-[inset_0_0_15px_rgba(34,197,94,0.3)]'
+                                                    ? 'bg-transparent text-[var(--color-accent)] drop-shadow-[0_0_8px_rgba(218,165,32,0.4)]'
                                                     : isHinted
                                                         ? 'bg-yellow-500/20 border-yellow-500/80 text-yellow-400 shadow-[0_0_20px_rgba(234,179,8,0.5)] animate-bounce-slow z-10'
                                                         : 'bg-white/[0.03] border-white/10 text-white/90'
@@ -312,9 +316,9 @@ const WordCrush = () => {
                                             <span className="relative z-10 leading-none">{letter}</span>
                                             {isFound && (
                                                 <motion.div
-                                                    initial={{ width: 0 }}
-                                                    animate={{ width: '80%' }}
-                                                    className="absolute h-[2px] md:h-[3px] bg-green-500/30 top-1/2 left-[10%] -translate-y-1/2 rounded-full"
+                                                    initial={{ opacity: 0, scale: 0.8 }}
+                                                    animate={{ opacity: 1, scale: 1 }}
+                                                    className="absolute inset-0 rounded-lg md:rounded-2xl bg-[var(--color-accent)] opacity-10 pointer-events-none"
                                                 />
                                             )}
                                         </motion.button>
