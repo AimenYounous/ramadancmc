@@ -23,6 +23,15 @@ const WordCrush = () => {
 
     const level = wordGames.levels[currentLevel];
 
+    // Calculate dynamic font size based on grid size
+    const dynamicFontSize = useMemo(() => {
+        // Base reference: for gridSize 8, we want approx 1.8rem on desktop
+        // For gridSize 16, we want approx 0.9rem
+        const scaleFactor = 15;
+        const size = scaleFactor / level.gridSize;
+        return `${Math.max(0.7, Math.min(size, 2.5))}rem`;
+    }, [level.gridSize]);
+
     // Handle Resize
     useEffect(() => {
         const handleResize = () => setWindowSize({ width: window.innerWidth, height: window.innerHeight });
@@ -268,7 +277,7 @@ const WordCrush = () => {
                 {/* Right Panel: Game Grid - MAXIMIZED */}
                 <div className="flex-1 flex items-center justify-center relative min-h-[400px] md:min-h-0">
                     <div
-                        className="bg-[rgba(20,30,25,0.85)] backdrop-blur-3xl p-2 md:p-6 rounded-[32px] md:rounded-[50px] border border-white/5 shadow-[0_0_100px_rgba(0,0,0,0.6)] relative overflow-hidden flex items-center justify-center w-full max-w-[min(100%,82vh)] aspect-square"
+                        className="bg-[rgba(20,30,25,0.85)] backdrop-blur-3xl p-2 md:p-6 rounded-2xl md:rounded-3xl border border-white/5 shadow-[0_0_100px_rgba(0,0,0,0.6)] relative overflow-hidden flex items-center justify-center w-full max-w-[min(100%,82vh)] aspect-square"
                     >
                         {/* Interactive Message Overlay */}
                         <AnimatePresence>
@@ -304,7 +313,7 @@ const WordCrush = () => {
                                             whileHover={!isFound ? { scale: 1.04, zIndex: 10 } : {}}
                                             whileTap={!isFound ? { scale: 0.96 } : {}}
                                             onClick={() => handleCellAction(rowIndex, colIndex, letter)}
-                                            className={`aspect-square flex items-center justify-center text-[10px] xs:text-xs sm:text-lg md:text-3xl font-black rounded-lg md:rounded-2xl border transition-all duration-300 relative ${isSelected
+                                            className={`aspect-square flex items-center justify-center font-black rounded-md border transition-all duration-300 relative ${isSelected
                                                 ? 'bg-[var(--color-accent)] text-black border-[var(--color-accent)] z-10 shadow-[0_0_30px_rgba(218,165,32,0.6)] scale-105'
                                                 : isFound
                                                     ? 'bg-transparent text-[var(--color-accent)] drop-shadow-[0_0_8px_rgba(218,165,32,0.4)]'
@@ -312,13 +321,14 @@ const WordCrush = () => {
                                                         ? 'bg-yellow-500/20 border-yellow-500/80 text-yellow-400 shadow-[0_0_20px_rgba(234,179,8,0.5)] animate-bounce-slow z-10'
                                                         : 'bg-white/[0.03] border-white/10 text-white/90'
                                                 }`}
+                                            style={{ fontSize: dynamicFontSize }}
                                         >
                                             <span className="relative z-10 leading-none">{letter}</span>
                                             {isFound && (
                                                 <motion.div
                                                     initial={{ opacity: 0, scale: 0.8 }}
                                                     animate={{ opacity: 1, scale: 1 }}
-                                                    className="absolute inset-0 rounded-lg md:rounded-2xl bg-[var(--color-accent)] opacity-10 pointer-events-none"
+                                                    className="absolute inset-0 rounded-md bg-[var(--color-accent)] opacity-10 pointer-events-none"
                                                 />
                                             )}
                                         </motion.button>

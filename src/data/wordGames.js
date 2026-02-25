@@ -50,11 +50,11 @@ export const wordGames = {
         },
         {
             id: 7,
-            title: "العشر الأواخر",
-            theme: "Last10Days",
+            title: "ليلة القدر",
+            theme: "LaylatAlQadr",
             gridSize: 13,
-            words: ["تراويح", "ليلة", "قدر", "اعتكاف", "جائزة", "بخور"],
-            description: "أجواء اواخر رمضان"
+            words: ["قدر", "دعاء", "قيام", "مغفرة", "ملائكة", "اجر"],
+            description: "أعمال وفضائل ليلة القدر"
         },
         {
             id: 8,
@@ -74,11 +74,11 @@ export const wordGames = {
         },
         {
             id: 10,
-            title: "التحدي الأكبر",
-            theme: "Ultimate",
+            title: "الصحابة الكرام",
+            theme: "Sahaba",
             gridSize: 16,
-            words: ["جبريل", "الفاروق", "الصديق", "ذوالنورين", "سيف_الله", "البتول"],
-            description: "القاب وأسماء خالدة"
+            words: ["عمر", "علي", "عثمان", "ابوبكر", "بلال", "خالد"],
+            description: "أسماء من خيرة أصحاب الرسول ﷺ"
         }
     ]
 };
