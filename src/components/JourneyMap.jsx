@@ -257,37 +257,6 @@ const JourneyMap = ({ currentDay = 5 }) => {
                         );
                     })}
 
-                    {/* Mascot Marker */}
-                    {nodes[currentDay - 1] && (
-                        <motion.g
-                            initial={false}
-                            animate={{
-                                x: nodes[currentDay - 1].x,
-                                y: nodes[currentDay - 1].y - 45
-                            }}
-                            transition={{ type: "spring", stiffness: 200, damping: 20 }}
-                            style={{ transform: "translateZ(50px)" }}
-                        >
-                            <foreignObject x="-20" y="-20" width="40" height="40">
-                                <motion.div
-                                    className="w-full h-full flex items-center justify-center p-1 bg-[rgba(255,215,0,0.2)] rounded-full backdrop-blur-md border-2 border-[#FFD700] shadow-[0_10px_20px_rgba(0,0,0,0.5)]"
-                                    animate={{ y: [0, -8, 0], scale: [1, 1.1, 1] }}
-                                    transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
-                                >
-                                    <FaMoon size={24} className="text-[#FFD700] drop-shadow-lg" />
-                                </motion.div>
-                            </foreignObject>
-
-                            <ellipse
-                                cx="0"
-                                cy="30"
-                                rx="10"
-                                ry="4"
-                                fill="rgba(0, 0, 0, 0.4)"
-                                filter="blur(4px)"
-                            />
-                        </motion.g>
-                    )}
 
                 </svg>
 

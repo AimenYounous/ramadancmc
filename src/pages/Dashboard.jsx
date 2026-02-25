@@ -102,15 +102,15 @@ const Dashboard = () => {
             <motion.div
                 initial={{ y: -30, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
-                className="z-10 w-full max-w-5xl flex flex-wrap items-center justify-center gap-2 md:gap-10 pt-4 md:pt-6 [&_@media(min-width:2600px)]:pt-10 opacity-80 shrink-0"
+                className="z-10 w-full max-w-5xl flex flex-wrap items-center justify-center gap-4 md:gap-10 pt-4 md:pt-6 [&_@media(min-width:2600px)]:pt-10 opacity-80 shrink-0"
             >
-                <img src={thrImg} alt="THR" className="h-8 md:h-16 [&_@media(min-width:2600px)]:h-40 object-contain" />
-                <div className="h-4 md:h-6 w-[1px] bg-white/20 mx-1 md:mx-2"></div>
-                <img src={aigImg} alt="AIG" className="h-8 md:h-16 [&_@media(min-width:2600px)]:h-40 object-contain" />
-                <div className="h-4 md:h-6 w-[1px] bg-white/20 mx-1 md:mx-2"></div>
-                <img src={diaImg} alt="DIA" className="h-8 md:h-16 [&_@media(min-width:2600px)]:h-40 object-contain" />
-                <div className="h-4 md:h-6 w-[1px] bg-white/20 mx-1 md:mx-2"></div>
-                <img src={cmcImg} alt="CMC" className="h-8 md:h-16 [&_@media(min-width:2600px)]:h-40 object-contain" />
+                <img src={thrImg} alt="THR" className="h-10 md:h-16 [&_@media(min-width:2600px)]:h-40 object-contain" />
+                <div className="h-6 w-[1px] bg-white/20 mx-2"></div>
+                <img src={aigImg} alt="AIG" className="h-10 md:h-16 [&_@media(min-width:2600px)]:h-40 object-contain" />
+                <div className="h-6 w-[1px] bg-white/20 mx-2"></div>
+                <img src={diaImg} alt="DIA" className="h-10 md:h-16 [&_@media(min-width:2600px)]:h-40 object-contain" />
+                <div className="h-6 w-[1px] bg-white/20 mx-2"></div>
+                <img src={cmcImg} alt="CMC" className="h-10 md:h-16 [&_@media(min-width:2600px)]:h-40 object-contain" />
             </motion.div>
 
             {/* MIDDLE & BOTTOM GROUP: Centered together */}
